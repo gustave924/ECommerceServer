@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const passport = require('passport');
 
 const dbConfig = require('./config/database.config');
 const userRouter = require('./app/routes/User')
@@ -20,7 +21,7 @@ mongoose.connect(dbConfig.url, {
 app.use(bodyParser.urlencoded({extended: true}));
 
 app.use(bodyParser.json());
-
+app.use(passport.initialize());
 app.use("/authentication", userRouter);
 
 app.get("/",(req, res) => {
